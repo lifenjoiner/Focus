@@ -75,6 +75,7 @@ android {
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
+        setProperty("archivesBaseName", "focus-$versionName")
 
     }
     buildTypes {
