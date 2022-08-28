@@ -74,7 +74,8 @@ public class FeedParser {
         //获取xml文件的编码
         String encode = "UTF-8";//默认编码
         String originCode = "ISO-8859-1";
-        String temp = xmlStr.substring(0,100);
+        int xmlStrLen = xmlStr.length();
+        String temp = xmlStr.substring(0, Math.min(xmlStrLen, 100));
         Pattern p = Pattern.compile("encoding=\"(.*?)\"");
         Matcher m = p.matcher(temp);
         boolean flag = m.find();//【部分匹配】，返回true or false，而且指针会移动下次匹配的位置
@@ -87,7 +88,7 @@ public class FeedParser {
 
 
         //如果文件没有乱码，则不需要转换
-        if (!java.nio.charset.Charset.forName("GBK").newEncoder().canEncode(xmlStr.substring(0,Math.min(xmlStr.length(),3000)))){
+        if (!java.nio.charset.Charset.forName("GBK").newEncoder().canEncode(xmlStr.substring(0, Math.min(xmlStrLen, 3000)))){
             xmlStr = new String(xmlStr.getBytes(originCode),encode);
         }else {
         }
